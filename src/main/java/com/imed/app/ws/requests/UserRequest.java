@@ -1,11 +1,42 @@
 package com.imed.app.ws.requests;
 
+import java.util.List;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class UserRequest {
+	
+	//@valid fel controller pour valider ces condition
+	@NotBlank(message = "Ce Champs Ne doit etre null !")
+	@NotEmpty(message = "Ce Champs Ne doit etre null !")
+	@NotNull(message = "Ce Champs Ne doit etre null !")
+	@Size(min = 3,message = "Ce champs doit avoir au moins 3 Caractere !")
 	private String firstname;
+	@NotBlank(message = "Ce Champs Ne doit etre null !")
+	@NotEmpty(message = "Ce Champs Ne doit etre null !")
+	@NotNull(message = "Ce Champs Ne doit etre null")
+	@Size(min = 3,message = "Ce champs doit avoir au moins 3 Caractere !")
 	private String lastname;
-	private String email;
+	@NotNull(message = "Ce Champs Ne doit etre null !")
+	@Email(message = "Ce champs doit respecter le format email !")
+	private String email;	
+	@NotBlank(message = "Ce Champs Ne doit etre null !")
+	@NotEmpty(message = "Ce Champs Ne doit etre null !")
+	@NotNull(message = "Ce Champs Ne doit etre null !")
+	@Size(min = 8,message = "mot de passe doit avoir au minimum 8 caractere !")
+	@Size(max = 12,message = "mot de passe doit avoir au max 12 caractere !")
+	//pour verifier le mot de passe a des uppercase lower case
+	@Pattern(regexp = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",message="Mot de passe doit avoir des lettres maj et des lettre miniscule")
 	private String password;
 	
+	private List<AdressRequest> addresses ;
+	
+	private ContactRequest contact;
 	
 	
 	
@@ -33,6 +64,18 @@ public class UserRequest {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<AdressRequest> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AdressRequest> addresses) {
+		this.addresses = addresses;
+	}
+	public ContactRequest getContact() {
+		return contact;
+	}
+	public void setContact(ContactRequest contact) {
+		this.contact = contact;
 	}
 	
 	

@@ -1,7 +1,7 @@
 package com.imed.app.ws.entities;
 
 import java.io.Serializable;
-
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -34,6 +34,11 @@ public class UserEntity implements Serializable{
 	
 	@Column(nullable = false)
 	private Boolean emailVerificationStatus = false;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	private List<AddressEntity> addresses;
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	private ContactEntity contact;
 
 	public long getId() {
 		return id;
@@ -97,6 +102,22 @@ public class UserEntity implements Serializable{
 
 	public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
+	}
+
+	public List<AddressEntity> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<AddressEntity> addresses) {
+		this.addresses = addresses;
+	}
+
+	public ContactEntity getContact() {
+		return contact;
+	}
+
+	public void setContact(ContactEntity contact) {
+		this.contact = contact;
 	}
 	
 	

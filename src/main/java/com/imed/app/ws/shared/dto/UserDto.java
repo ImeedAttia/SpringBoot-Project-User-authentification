@@ -1,6 +1,7 @@
 package com.imed.app.ws.shared.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserDto implements Serializable{
 
@@ -13,6 +14,8 @@ public class UserDto implements Serializable{
 	private String lastname;
 	private String email;
 	private String password;
+	private ContactDto contact;
+	private List<AddressDto> addresses;
 	private String encryptedPassword;
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus = false;
@@ -74,6 +77,18 @@ public class UserDto implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public ContactDto getContact() {
+		return contact;
+	}
+	public void setContact(ContactDto contact) {
+		this.contact = contact;
+	}
+	public List<AddressDto> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AddressDto> addresses) {
+		this.addresses = addresses;
 	}
 	 
 	

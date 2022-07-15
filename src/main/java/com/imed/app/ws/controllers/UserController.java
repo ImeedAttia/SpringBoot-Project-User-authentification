@@ -1,12 +1,13 @@
 package com.imed.app.ws.controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,9 @@ public class UserController {
 		return new ResponseEntity<UserResponses>(userResponses,HttpStatus.OK);	
 	}
 	
+	
+	
+	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public List<UserResponses>getAllUsers(@RequestParam(value="page",defaultValue = "1") int page,@RequestParam(value="limit",defaultValue = "4") int limit) {		
 		List<UserResponses> userResponse = new ArrayList<>();		
@@ -63,15 +67,21 @@ public class UserController {
 	
 	@PostMapping(consumes ={MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE},
 				 produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserResponses> createUser(@RequestBody UserRequest userRequest) throws Exception{
+	public ResponseEntity<UserResponses> createUser(@Valid @RequestBody  UserRequest userRequest) throws Exception{
 		
 		if(userRequest.getFirstname().isEmpty()) throw new UserExceptions(ErrorMessages.MISSING_REQUIRED_FILED.getErrorMessage());
 		
-		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(userRequest, userDto);
+		//UserDto userDto = new UserDto();
+		//BeanUtils.copyProperties(userRequest, userDto);
+		//UserDto createUser = userService.createUser(userDto);
+		//UserResponses userResponse = new UserResponses();
+		//BeanUtils.copyProperties(createUser, userResponse);
+		
+		
+		ModelMapper modelMapper = new ModelMapper();
+		UserDto userDto = modelMapper.map(userRequest, UserDto.class);
 		UserDto createUser = userService.createUser(userDto);
-		UserResponses userResponse = new UserResponses();
-		BeanUtils.copyProperties(createUser, userResponse);
+		UserResponses userResponse = modelMapper.map(createUser, UserResponses.class);
 		return new ResponseEntity<UserResponses>(userResponse,HttpStatus.CREATED);
 	}
 	
