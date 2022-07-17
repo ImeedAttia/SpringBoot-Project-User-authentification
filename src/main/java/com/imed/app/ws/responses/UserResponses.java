@@ -9,6 +9,7 @@ public class UserResponses {
 	private String email;
 	private List<AddressResponse> addresses;
 	private ContactResponse contact;
+	private Boolean admin;
 	
 	public String getUserId() {
 		return userId;
@@ -45,6 +46,12 @@ public class UserResponses {
 	}
 	public void setContact(ContactResponse contact) {
 		this.contact = contact;
+	}
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 
 }

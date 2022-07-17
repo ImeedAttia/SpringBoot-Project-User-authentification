@@ -82,7 +82,7 @@ public class UserController {
 				 produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserResponses> createUser(@Valid @RequestBody  UserRequest userRequest) throws Exception{
 		
-		if(userRequest.getFirstname().isEmpty()) throw new UserExceptions(ErrorMessages.MISSING_REQUIRED_FILED.getErrorMessage());
+		if(userRequest.getFirstname().isEmpty() && userRequest.getEmail().isEmpty() && userRequest.getPassword().isEmpty()) throw new UserExceptions(ErrorMessages.MISSING_REQUIRED_FILED.getErrorMessage());
 		
 		ModelMapper modelMapper = new ModelMapper();
 		UserDto userDto = modelMapper.map(userRequest, UserDto.class);

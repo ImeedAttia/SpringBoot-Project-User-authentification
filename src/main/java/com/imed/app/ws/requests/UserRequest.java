@@ -24,7 +24,8 @@ public class UserRequest {
 	private String lastname;
 	@NotNull(message = "Ce Champs Ne doit etre null !")
 	@Email(message = "Ce champs doit respecter le format email !")
-	private String email;	
+	private String email;
+	private Boolean admin;
 	@NotBlank(message = "Ce Champs Ne doit etre null !")
 	@NotEmpty(message = "Ce Champs Ne doit etre null !")
 	@NotNull(message = "Ce Champs Ne doit etre null !")
@@ -76,6 +77,12 @@ public class UserRequest {
 	}
 	public void setContact(ContactRequest contact) {
 		this.contact = contact;
+	}
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 	
 	
