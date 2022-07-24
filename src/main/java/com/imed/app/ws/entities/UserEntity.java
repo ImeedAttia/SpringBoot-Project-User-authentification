@@ -1,9 +1,9 @@
 package com.imed.app.ws.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 import javax.persistence.*;
 
@@ -41,10 +41,6 @@ public class UserEntity implements Serializable{
 	
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<AddressEntity> addresses;
-	@OneToOne(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private ContactEntity contact;
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "users")
-	private Set<GroupEntity> groups = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -117,23 +113,6 @@ public class UserEntity implements Serializable{
 	public void setAddresses(List<AddressEntity> addresses) {
 		this.addresses = addresses;
 	}
-
-	public ContactEntity getContact() {
-		return contact;
-	}
-
-	public void setContact(ContactEntity contact) {
-		this.contact = contact;
-	}
-
-	public Set<GroupEntity> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(Set<GroupEntity> groups) {
-		this.groups = groups;
-	}
-
 	public Boolean getAdmin() {
 		return admin;
 	}
